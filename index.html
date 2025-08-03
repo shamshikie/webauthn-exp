@@ -74,8 +74,8 @@
                 class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200"
                 placeholder="your@email.com"
                 autocomplete="username webauthn"
-                required=""
-                value=""
+                required
+                autofocus
               />
             </div>
           </div>
@@ -142,7 +142,8 @@
                     publicKey: {
                         challenge: new Uint8Array([1, 2, 3, 4]),
                         //timeout:324441, },
-                        mediation: "conditional" }
+                        mediation: "conditional" 
+                    }
                 });
                 if (credential) {
                     console.log("ログイン成功\n" + credential);
