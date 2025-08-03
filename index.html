@@ -9,176 +9,116 @@
     <meta name="description" content="ログイン" />
   </head>
   <body class="__variable_5cfdac __variable_9a8899 antialiased">
-    <div
-      class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4"
-    >
-      <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-8">
-        <div class="text-center mb-8">
-          <div
-            class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-key w-8 h-8 text-blue-600"
-              aria-hidden="true"
-            >
-              <path
-                d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"
-              ></path>
-              <path d="m21 2-9.6 9.6"></path>
-              <circle cx="7.5" cy="15.5" r="5.5"></circle>
-            </svg>
-          </div>
-          <h1 class="text-3xl font-bold text-gray-800 mb-2">
-            パスキーログイン
-          </h1>
-          <p class="text-gray-600">
-            メールアドレスを入力してパスキーでログインしてください
-          </p>
+    <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-8">
+      <h1 class="text-3xl font-bold text-gray-800 mb-2">パスキーログイン</h1>
+    </div>
+    <form class="space-y-6">
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-2"
+          >メールアドレス</label
+        >
+        <div class="relative">
+          <input
+            type="email"
+            id="email"
+            class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200"
+            placeholder="your@email.com"
+            autocomplete="username webauthn"
+            required
+            autofocus
+          />
         </div>
-        <form class="space-y-6">
-          <div>
-            <label
-              for="email"
-              class="block text-sm font-medium text-gray-700 mb-2"
-              >メールアドレス</label
-            >
-            <div class="relative">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-mail absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
-                aria-hidden="true"
-              >
-                <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
-                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-              </svg>
-              <input
-                type="email"
-                id="email"
-                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200"
-                placeholder="your@email.com"
-                autocomplete="username webauthn"
-                required
-                autofocus
-              />
-            </div>
-          </div>
-          <button
-            type="submit"
-            class="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white font-medium py-3 px-4 rounded-xl transition-colors duration-200 flex items-center justify-center space-x-2"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-key w-5 h-5"
-              aria-hidden="true"
-            >
-              <path
-                d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"
-              ></path>
-              <path d="m21 2-9.6 9.6"></path>
-              <circle cx="7.5" cy="15.5" r="5.5"></circle>
-            </svg>
-            <span>パスキーでログイン</span>
-          </button>
-        </form>
-        <div class="mt-8 pt-6 border-t border-gray-200">
-          <div class="flex items-center space-x-2 text-sm text-gray-600">
-            <a href="register.html">登録はこちら</a>
-          </div>
-        </div>
+      </div>
+      <button
+        type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white font-medium py-3 px-4 rounded-xl transition-colors duration-200 flex items-center justify-center space-x-2"
+      >
+        vanilla webauthn ログイン
+      </button>
+    </form>
+    <div class="mt-8 pt-6 border-t border-gray-200">
+      <div class="flex items-center space-x-2 text-sm text-gray-600">
+        <a href="register.html">登録はこちら</a>
       </div>
     </div>
     <script>
-        window.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable()
-        .then(result => {
+      window.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable().then(
+        (result) => {
           if (!result) {
-               console.error("No platform authenticator found. Ifyour OS does not come with one, try using devtools to set one up."); 
-            } 
-        });
+            console.error(
+              "No platform authenticator found. Ifyour OS does not come with one, try using devtools to set one up."
+            );
+          }
+        }
+      );
 
-        let startConditionalRequest = async () => {
-            if (window.PublicKeyCredential.isConditionalMediationAvailable) {
-                console.log("Conditional UI is understood by the browser");
-                if (!await window.PublicKeyCredential.isConditionalMediationAvailable()) {
-                    console.error("Conditional UI is understood by your browser but not available");
-                    return;
-                }
-            } else {
-                if (!navigator.credentials.conditionalMediationSupported) {
-                    console.error("Your browser does not implement Conditional UI (are you running the right chrome/safari version with the right flags?)");
-                    return;
-                } else {
-                    console.log("This browser understand the old version of Conditional UI feature detection"); 
-                } 
-            }
+      let startConditionalRequest = async () => {
+        if (window.PublicKeyCredential.isConditionalMediationAvailable) {
+          console.log("Conditional UI is understood by the browser");
+          if (
+            !(await window.PublicKeyCredential.isConditionalMediationAvailable())
+          ) {
+            console.error(
+              "Conditional UI is understood by your browser but not available"
+            );
+            return;
+          }
+        } else {
+          if (!navigator.credentials.conditionalMediationSupported) {
+            console.error(
+              "Your browser does not implement Conditional UI (are you running the right chrome/safari version with the right flags?)"
+            );
+            return;
+          } else {
+            console.log(
+              "This browser understand the old version of Conditional UI feature detection"
+            );
+          }
+        }
 
-            try { 
-                let credential = await navigator.credentials.get({ 
-                    signal: new AbortController().signal, 
-                    publicKey: {
-                        challenge: new Uint8Array([1, 2, 3, 4]),
-                        //timeout:324441, },
-                        mediation: "conditional" 
-                    }
-                });
-                if (credential) {
-                    console.log("ログイン成功\n" + credential);
-                } else {
-                    console.error("Credential returned null");
-                }
-            } catch (error) {
-                if (error.name == "AbortError") {
-                    console.log("request aborted");
-                    return;
-                }
-                console.error(error.toString());
-            }
-        };
+        try {
+          let credential = await navigator.credentials.get({
+            signal: new AbortController().signal,
+            publicKey: {
+              challenge: new Uint8Array([1, 2, 3, 4]),
+              //timeout:324441, },
+              mediation: "conditional",
+            },
+          });
+          if (credential) {
+            console.log("ログイン成功\n" + credential);
+          } else {
+            console.error("Credential returned null");
+          }
+        } catch (error) {
+          if (error.name == "AbortError") {
+            console.log("request aborted");
+            return;
+          }
+          console.error(error.toString());
+        }
+      };
 
-        // let startNormalRequest = () => {
-        //     console.log('starting webauthn conditional ui request');
-        //     navigator.credentials.get({ 
-        //         publicKey: { // don't do this in production!
-        //         challenge: new Uint8Array([1, 2, 3, 4]) }, 
-        //     }).then(credential => { 
-        //         if (credential) { 
-        //             let username = String.fromCodePoint(...new Uint8Array(credential.response.userHandle)); 
-        //             window.location = "site.html?username=" + username; }
-        //         else { 
-        //             console.error("Credential returned null");
-        //         }
-        //     }).catch(error => { 
-        //         console.error(error.toString());
-        //     }).finally(() => { 
-        //         startConditionalRequest(); 
-        //     }); 
-        // };
+      // let startNormalRequest = () => {
+      //     console.log('starting webauthn conditional ui request');
+      //     navigator.credentials.get({
+      //         publicKey: { // don't do this in production!
+      //         challenge: new Uint8Array([1, 2, 3, 4]) },
+      //     }).then(credential => {
+      //         if (credential) {
+      //             let username = String.fromCodePoint(...new Uint8Array(credential.response.userHandle));
+      //             window.location = "site.html?username=" + username; }
+      //         else {
+      //             console.error("Credential returned null");
+      //         }
+      //     }).catch(error => {
+      //         console.error(error.toString());
+      //     }).finally(() => {
+      //         startConditionalRequest();
+      //     });
+      // };
 
-        startConditionalRequest();
+      startConditionalRequest();
     </script>
   </body>
 </html>
