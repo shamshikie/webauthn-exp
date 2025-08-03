@@ -120,8 +120,6 @@
             } 
         });
 
-        let abortController; 
-        let abortSignal; 
         let startConditionalRequest = async () => {
             if (window.PublicKeyCredential.isConditionalMediationAvailable) {
                 console.log("Conditional UI is understood by the browser");
@@ -137,16 +135,17 @@
                     console.log("This browser understand the old version of Conditional UI feature detection"); 
                 } 
             }
-            abortController = new AbortController();
-            abortSignal = abortController.signal;
+
             try { 
-                let credential = await navigator.credentials.get({ signal: abortSignal, publicKey: {
-                challenge: new Uint8Array([1, 2, 3, 4]),
-                //timeout:324441, },
-                mediation: "conditional" }});
+                let credential = await navigator.credentials.get({ 
+                    signal: new AbortController().signal, 
+                    publicKey: {
+                        challenge: new Uint8Array([1, 2, 3, 4]),
+                        //timeout:324441, },
+                        mediation: "conditional" }
+                });
                 if (credential) {
-                    let username = String.fromCodePoint(...new Uint8Array(credential.response.userHandle));
-                    window.location = "site.html?username=" + username;
+                    console.log("ログイン成功\n" + credential);
                 } else {
                     console.error("Credential returned null");
                 }
@@ -159,24 +158,24 @@
             }
         };
 
-        let startNormalRequest = () => {
-            console.log('starting webauthn conditional ui request');
-            navigator.credentials.get({ 
-                publicKey: { // don't do this in production!
-                challenge: new Uint8Array([1, 2, 3, 4]) }, 
-            }).then(credential => { 
-                if (credential) { 
-                    let username = String.fromCodePoint(...new Uint8Array(credential.response.userHandle)); 
-                    window.location = "site.html?username=" + username; }
-                else { 
-                    console.error("Credential returned null");
-                }
-            }).catch(error => { 
-                console.error(error.toString());
-            }).finally(() => { 
-                startConditionalRequest(); 
-            }); 
-        };
+        // let startNormalRequest = () => {
+        //     console.log('starting webauthn conditional ui request');
+        //     navigator.credentials.get({ 
+        //         publicKey: { // don't do this in production!
+        //         challenge: new Uint8Array([1, 2, 3, 4]) }, 
+        //     }).then(credential => { 
+        //         if (credential) { 
+        //             let username = String.fromCodePoint(...new Uint8Array(credential.response.userHandle)); 
+        //             window.location = "site.html?username=" + username; }
+        //         else { 
+        //             console.error("Credential returned null");
+        //         }
+        //     }).catch(error => { 
+        //         console.error(error.toString());
+        //     }).finally(() => { 
+        //         startConditionalRequest(); 
+        //     }); 
+        // };
 
         startConditionalRequest();
     </script>
