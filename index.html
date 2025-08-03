@@ -125,7 +125,7 @@
         let startConditionalRequest = async () => {
             if (window.PublicKeyCredential.isConditionalMediationAvailable) {
                 console.log("Conditional UI is understood by the browser");
-                if (!awaitwindow.PublicKeyCredential.isConditionalMediationAvailable()) {
+                if (!await window.PublicKeyCredential.isConditionalMediationAvailable()) {
                     console.error("Conditional UI is understood by your browser but not available");
                     return;
                 }
@@ -158,7 +158,7 @@
                 console.error(error.toString());
             }
         };
-        
+
         let startNormalRequest = () => {
             console.log('starting webauthn conditional ui request');
             navigator.credentials.get({ 
@@ -179,15 +179,6 @@
         };
 
         startConditionalRequest();
-
-        document.getElementById("manual-login").addEventListener("click", (e) => {
-            e.preventDefault();
-            if (abortController) {
-                console.log("aborting request & starting new one"); // Abort the request synchronously. // This lets us se the user activation from clicking the button on safari to trigger
-                webauthn.abortController.abort();
-            }
-            startNormalRequest();
-        });
     </script>
   </body>
 </html>
